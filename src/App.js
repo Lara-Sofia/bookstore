@@ -1,80 +1,52 @@
-import './App.css';
+import { useContext } from "react";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 
-import Header from './components/Header/Header.js';
-import Books from './components/Books/Books.js';
-import NewBook from './components/NewBook/NewBook';
-import BookFilter from './components/Filter/BookFilter';
-import Login from './components/Form/Login';
+import "./App.css";
 
-import { useState } from 'react';
+import Login from "./components/Login/Login";
+import Dashboard from "./components/Dashboar/Dashboar";
+import Protected from "./components/routes/Protected";
+import NotFound from "./components/routes/NotFound";
+import { ThemeContext } from "./components/services/theme/theme.context";
+import Spinner from "./components/ui/Spinner/Spinner";
+import { APIContext } from "./components/services/api/api.context";
+import Singin from "./components/Singup/Singup";
+const App = () => {
+  const { theme } = useContext(ThemeContext);
+  const { isLoading } = useContext(APIContext);
 
-
-function App() {
-  //mostrar valores harcodeados
-  const hardcoreBooks = [
+  const router = createBrowserRouter([
+    { path: "/", element: <Navigate to="login" /> },
     {
-      id: 1,
-      title: "100 años de soledad",
-      author: "Gabriel García Marquez",
-      date: new Date(2021, 8, 12),
-      pages: 410,
+      path: "/login",
+      element: <Login />,
     },
     {
-      id: 2,
-      title: "Todos los fuegos el fuego",
-      author: "Julio Cortazar",
-      date: new Date(2020, 6, 11),
-      pages: 197,
+      path: "/singin",
+      element: <Singin />, 
     },
     {
-      id: 3,
-      title: "Asesinato en el Orient Express",
-      author: "Agatha Christie",
-      date: new Date(2021, 5, 9),
-      pages: 256,
+      path: "/home",
+      element: (
+        <Protected>
+          <Dashboard />
+        </Protected>
+      ),
     },
     {
-      id: 4,
-      title: "Las dos torres",
-      author: "J.R.R Tolkien",
-      date: new Date(2020, 3, 22),
-      pages: 352,
+      path: "*",
+      element: <NotFound />,
     },
-  ];
-
-  //setemos año, y pasamos de hijo --> padre
-  const [selectYear, setSelectYear] = useState('');
-  const handlerYear = (year) => { 
-      setSelectYear(year); 
-      console.log(year);
-  }
-
-  //seteamos y pasamos de hijo --> padre --> abuelo
-  const [books, setBooks] = useState(hardcoreBooks);
-  const sendDataBookToApp = (data) => { 
-    //const newArrayDataBook = [data, ...books];
-    setBooks([data, ...books]);
-    //localStorage.setItem('books', JSON.stringify(newArrayDataBook));
-    console.log('in app');
-  }
-  console.log(books);
-
-
-  //SOLO POR EL LOGIN
-  
-  
+  ]);
   return (
-    /*<div>
-      <Header />
-      <NewBook sendDataBookFromNewBook={sendDataBookToApp}/>
-      <BookFilter 
-        selectYear={selectYear} 
-        onYearChangeToApp={handlerYear}/>
-      <Books selectYear={selectYear} books = {books}/>
-    </div>*/
-    <>
-      <Login/>
-    </>
+    <div className={`${theme === "dark" && "dark-theme"}`}>
+      {isLoading && <Spinner />}
+      <RouterProvider router={router} />
+    </div>
   );
 };
 

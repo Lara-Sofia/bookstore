@@ -1,39 +1,33 @@
-import './Books.css';
+import "./Books.css";
 
-import BookItems from '../BookItem/BookItems';
+import BookItem from "../BookItem/BookItems";
 
-const Books = ({books, selectYear}) => {
-    //verificación x si no ay liobros ese año
-    if (books.length === 0) return <></>
+const Books = ({ books, filterYear }) => {
+  if (books.length === 0) {
+    return <></>;
+  }
 
-    const booksMap = books
-        .filter((book) => book.date.getFullYear().toString() === selectYear)
-        .map((book) => (
-            <BookItems
-              key = {book.id}
-              title = {book.title}
-              author = {book.author}
-              date = {book.date}
-              pages = {book.pages}
-            />
-        ))
-    
-        return (
-        <div className='book-container'>
-          {booksMap.length === 0 ? (<p>no hay libros disponibles</p>) : booksMap}
-          {
-            //books.map((book) => (
-            //    <BookItems
-            //    id = {book.id}
-            //    title = {book.title}
-            //    author = {book.author}
-            //    date = {book.date}
-            //    pages = {book.pages}
-            //    />
-            //))
-          }
-        </div>
-    );
+  const booksMapped = books
+    .filter((book) => book.dateRead.getFullYear().toString() === filterYear)
+    .map((book) => (
+      <BookItem
+        key={book.id}
+        bookTitle={book.title}
+        bookAuthor={book.author}
+        bookDateRead={book.dateRead}
+        bookPageCount={book.pageCount}
+      />
+    ));
+
+  return (
+    <div className="books">
+      {booksMapped.length === 0 ? (
+        <p>No hay libros disponibles</p>
+      ) : (
+        booksMapped
+      )}
+    </div>
+  );
 };
 
 export default Books;

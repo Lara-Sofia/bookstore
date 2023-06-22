@@ -1,14 +1,18 @@
-import './Card.css';
+import { useContext } from "react";
+import "./Card.css";
+import { ThemeContext } from "../services/theme/theme.context";
 
-const Card = ({children}) => {
-    return (
-        <div className='book-item-container'>
-            {children}
-        </div>
-    );
+const BookCard = ({ children }) => {
+  const { theme } = useContext(ThemeContext);
+  return (
+    <div
+      className={`book-item-container ${
+        theme === "dark" && "book-item-container-dark"
+      }`}
+    >
+      {children}
+    </div>
+  );
 };
 
-/*dentro del objeto props al que tienen acceso todos los componentes, posee una
-propiedad llamada children que tomará el lugar de lo que nosotros encerremos.*/
-
-export default Card;
+export default BookCard;

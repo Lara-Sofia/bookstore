@@ -1,29 +1,27 @@
-import './BookItems.css';
+import { useState } from "react";
 
-import Card from '../Card/Card';
-import ReadDate from '../ReadDate/ReadDate';
+import "./BookItems.css";
 
-import { useState } from 'react'; 
+import DateRead from "../ReadDate/ReadDate";
+import BookCard from "../Card/Card";
 
-const BookItems =  ({title, author, date, pages}) => {
+const BookItem = ({ bookTitle, bookAuthor, bookDateRead, bookPageCount }) => {
+  const [title, setTitle] = useState(bookTitle);
 
-    const [newTitle, setNewTitle ] = useState(title); // set new title
-    const changeTitleHandler = () => { //función relacionada a eventos 
-        setNewTitle('Actualizado'); 
-        // no se le asigna, sino que se rederiza (actualiza)
-        //set...is a fuction
-        console.log(newTitle);
-    };
+  const changeTitleHandler = () => {
+    setTitle("Actualizado!");
+    console.log(title);
+  };
 
-    return (
-        <Card>
-            <h1>{newTitle}</h1>
-            <h3>{author}</h3>
-            <ReadDate readDate = {date}/>
-            <p>{pages}</p>
-            <button onClick={changeTitleHandler}> Cambiar título </button>
-        </Card>
-    );
+  return (
+    <BookCard>
+      <h2>{title}</h2>
+      <h3>{bookAuthor}</h3>
+      <DateRead bookDateRead={bookDateRead} />
+      <p>{bookPageCount} páginas</p>
+      <button onClick={changeTitleHandler}>Cambiar titulo</button>
+    </BookCard>
+  );
 };
 
-export default BookItems;
+export default BookItem;

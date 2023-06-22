@@ -1,18 +1,17 @@
-import './ReadDate.css';
+import "./ReadDate.css";
 
+const DateRead = ({ bookDateRead }) => {
+  const year = bookDateRead.getFullYear();
+  const month = bookDateRead.toLocaleString("es-AR", { month: "long" });
+  const day = bookDateRead.toLocaleString("es-AR", { day: "2-digit" });
 
-const ReadDate = ({readDate}) => {
-    const year = readDate.getFullYear();
-    const month = readDate.toLocaleString("es-AR", { month: "long" });
-    const day = readDate.toLocaleString("es-AR", { day: "2-digit" });
-
-    return (
-        <div className='readDate'>
-        {year}
-        {month}
-        {day}
-        </div>
-    );
+  return (
+    <div className="date-container">
+      <div>{year}</div>
+      <div>{month}</div>
+      <div>{day}</div>
+    </div>
+  );
 };
 
-export default ReadDate;
+export default DateRead;

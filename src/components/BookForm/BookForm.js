@@ -1,81 +1,108 @@
-import './BookForm.css';
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 
-import { useState } from 'react';
+import "./BookForm.css";
 
-const BookForm = ({sendDataBookFromNewBook}) => {
-    const [enteredTitle, setEnteredTitle] = useState('');
-    const [enteredAuthor, setEnteredAuthor] = useState('');
-    const [enteredPage, setEnteredPage] = useState('');
-    const [enteredDate, setEnteredDate] = useState('');
-    
+const BookForm = ({ onBookAdded, onHideForm }) => {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [dateRead, setDateRead] = useState("");
+  const [pageCount, setPageCount] = useState("");
+  const [formValid, setFormValid] = useState(false);
 
-    const changeTitleHandler = (e) => {
-        setEnteredTitle(e.target.value);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("Check form");
+      setFormValid(title && author && dateRead && pageCount);
+    }, 500);
+
+    return () => {
+      console.log("Cleanup");
+      clearTimeout(timer);
     };
-    const changeAuthorHandler = (e) => {
-        setEnteredAuthor(e.target.value);
+  }, [title, author, dateRead, pageCount]);
+
+  const changeTitleHandler = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const changeAuthorHandler = (event) => {
+    setAuthor(event.target.value);
+  };
+
+  const changeDateReadHandler = (event) => {
+    setDateRead(event.target.value);
+  };
+
+  const changePageCountHandler = (event) => {
+    setPageCount(event.target.value);
+  };
+
+  const addBookHandler = (event) => {
+    event.preventDefault();
+    const newBook = {
+      id: Math.random(),
+      title,
+      author,
+      dateRead: new Date(dateRead),
+      pageCount,
     };
-    const changePageHandler = (e) => {
-        setEnteredPage(e.target.value);
-    };
-    const changeDateHandler = (e) => {
-        setEnteredDate(e.target.value);
-    };
+    onBookAdded(newBook);
+  };
 
-    const submitBookHandler = (e) => {
-        e.preventDefault() //evita el reload
-        const dataBook = {
-            id: Date.now(),
-            title : enteredTitle,
-            author : enteredAuthor,
-            page : enteredPage,
-            date : new Date(enteredDate)
-        };
-        //console.log(dataBook);
-        sendDataBookFromNewBook(dataBook); // lo envía como un parámetro
-        setEnteredTitle("");
-        setEnteredAuthor("");
-        setEnteredPage("");
-        setEnteredDate("");
-    };
+  const hideFormHandler = (event) => {
+    event.preventDefault();
+    onHideForm();
+  };
 
-    return (
-        <form onSubmit={submitBookHandler}>
-            <div className='new-book-controls'>
-                <div className='new-book-control'>
-                    <label>Título</label>
-                    <input type='text'
-                    value={enteredTitle} 
-                    onChange={changeTitleHandler}/>
-                </div>
-
-                <div className='new-book-control'>
-                    <label>Autor</label>
-                    <input type='text'
-                    value={enteredAuthor}
-                    onChange={changeAuthorHandler}/>
-                </div>
-
-                <div className='new-book-control'>
-                    <label>páginas</label>
-                    <input type='number' min='1' step='1'
-                    value={enteredPage}
-                    onChange={changePageHandler}/>
-                </div>
-
-                <div className='new-book-control'>
-                    <label>¿Cuándo terminaste de leerlo?</label>
-                    <input type="date" min='2019-01-01' max="2022-12-31" 
-                    value={enteredDate}
-                    onChange={changeDateHandler}/>
-                </div>
-
-            </div>
-            <div className='new-book-actions'>
-                <button type='submit' onClick={submitBookHandler}>Agregar lectura</button>
-            </div>
-        </form>
-    );
+  return (
+    <form>
+      <div className="new-book-controls">
+        <div className="new-book-control">
+          <label>Título</label>
+          <input
+            onChange={changeTitleHandler}
+            type="text"
+            className="input-control"
+          />
+        </div>
+        <div className="new-book-control">
+          <label>Autor</label>
+          <input
+            onChange={changeAuthorHandler}
+            type="text"
+            className="input-control"
+          />
+        </div>
+        <div className="new-book-control">
+          <label>Páginas</label>
+          <input
+            onChange={changePageCountHandler}
+            type="number"
+            className="input-control"
+            min="1"
+            step="1"
+          />
+        </div>
+        <div className="new-book-control">
+          <label>¿Cuándo terminaste de leerlo?</label>
+          <input
+            onChange={changeDateReadHandler}
+            type="date"
+            className="input-control"
+            min="2019-01-01"
+            max="2023-12-31"
+          />
+        </div>
+      </div>
+      <div className="new-book-actions">
+        <button onClick={hideFormHandler}>Cancelar</button>
+        <Button disabled={!formValid} onClick={addBookHandler}>
+          Agregar lectura
+        </Button>
+      </div>
+    </form>
+  );
 };
 
 export default BookForm;

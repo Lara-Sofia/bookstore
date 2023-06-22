@@ -1,5 +1,10 @@
-.readDate {
-    background-color: #73C6B6;
-    border-radius: 50%;
-    padding: 5%;
+.date-container {
+  width: 80%;
+  background-color: green;
+  color: white;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  border: 1px solid black;
+  border-radius: 10px;
 }

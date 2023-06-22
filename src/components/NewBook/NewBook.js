@@ -1,30 +1,32 @@
-import'./NewBook.css';
+import "./NewBook.css";
 
-import BookForm from '../BookForm/BookForm';
+import BookForm from "../BookForm/BookForm";
+import { useState } from "react";
 
-const NewBook = ({sendDataBookFromNewBook}) => {
-    const sendDataBookToApp = (enteredDataBook) => {
-        console.log(enteredDataBook);
-        console.log('seding new book');
-        sendDataBookFromNewBook(enteredDataBook);
-    }
+const NewBook = ({ onBookAdded }) => {
+  const [showForm, setShowForm] = useState(false);
 
-//const dataBookFromBookForm = (enteredDataBook) => {
-//    const dataBook = {
-//        ...enteredDataBook,
-//        id: Math.random().toString()
-//    };
-//   // console.log(dataBook );
-//   sendDataBookToApp(dataBook);
-//};
+  const onBookAddedHandler = (book) => {
+    console.log(book);
+    console.log("In new Book");
+    onBookAdded(book);
+  };
+  const showBookForm = () => {
+    setShowForm(true);
+  };
 
-    return (
-        <div className='new-book'>
-            <BookForm sendDataBookFromNewBook={sendDataBookToApp}/>
-        </div>
-    );
-
-    
+  const hideBookForm = () => {
+    setShowForm(false);
+  };
+  return (
+    <div className="new-book">
+      {showForm ? (
+        <BookForm onHideForm={hideBookForm} onBookAdded={onBookAddedHandler} />
+      ) : (
+        <button onClick={showBookForm}>Registrar nuevo libro</button>
+      )}
+    </div>
+  );
 };
 
 export default NewBook;
