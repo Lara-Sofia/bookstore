@@ -8,8 +8,9 @@ import { Button, Col, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../services/authentication/authentication.context";
 import ToggleTheme from "../ui/ToggleTheme";
 import { APIContext } from "../services/api/api.context";
+import FireBase from "../../firebase/FireBase";
 
-const BOOKS = [
+/* const BOOKS = [
   {
     id: 1,
     title: "100 años de soledad",
@@ -39,7 +40,7 @@ const BOOKS = [
     pageCount: 352,
   },
 ];
-
+*/
 const Dashboard = () => {
   const { user, handleLogout } = useContext(AuthenticationContext);
   const { toggleLoading } = useContext(APIContext);
@@ -108,6 +109,7 @@ const Dashboard = () => {
         onFilterYearChange={filterYearChanged}
       />
       <Books filterYear={filterYear} books={books} />
+      <FireBase/>
     </>
   );
 };
