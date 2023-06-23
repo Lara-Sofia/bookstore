@@ -1,0 +1,85 @@
+{
+    "Books": [
+
+        {
+            "id": 1,
+            "book": "Padre Rico, Padre Pobre",
+            "author": "Robert",
+            "date": [2021, 8, 12],
+            "pagesCount" :410,
+            "imgUrl": "./img/id-1.jpg"
+        },
+        {
+            "id": 2,
+            "book": "Todos los fuegos el fuego",
+            "author": "Julio Cortazar",
+            "date": [2020, 6, 11],
+            "pagesCount":197,
+            "imgUrl": "./img/id-2.jpg"
+        },
+        {
+            "id": 3,
+            "book": "Asesino en el Orient express",
+            "author": "Agatha Christie",
+            "date": [2021, 5, 9],
+            "pagesCount":256,
+            "imgUrl": "./img/id-3.jpg"
+        },
+        {
+            "id": 4,
+            "book": "Las dos torres",
+            "author": "J.R.R Tolkien",
+            "date": [2020, 3, 22],
+            "pagesCount":352,
+            "imgUrl": "./img/id-4.jpg"
+        },
+        {
+            "id": 5,
+            "book": "El ángel de la ciudad",
+            "author": "Eva Saenz De la Ciudad",
+            "date": [2018, 6, 23],
+            "pagesCount":384,
+            "imgUrl": "./img/id-5.jpg"
+        },
+        {
+            "id": 6,
+            "book": "Nuestro Mundial",
+            "author": "Andrés Burgo",
+            "date": [2023, 6, 6],
+            "pagesCount":70,
+            "imgUrl": "./img/id-6.jpg"
+        },
+        {
+            "id": 7,
+            "book": "Divina Comedia",
+            "author": "Dante Alghieri",
+            "date": [1983, 8, 4],
+            "pagesCount":384,
+            "imgUrl": "./img/id-7.jpg"
+        },
+        {
+            "id": 8,
+            "book": "El Principito",
+            "author": "Antoine De St-Exupery",
+            "date": [1943, 7, 10],
+            "pagesCount":120,
+            "imgUrl": "./img/id-8.jpg"
+        },
+        {
+            "id": 9,
+            "book": "El código Da Vinci",
+            "author": "Dan Brown",
+            "date": [2018, 6, 23],
+            "pagesCount":384,
+            "imgUrl": "./img/id-9.jpg"
+        },
+        {
+            "id": 10,
+            "book": "Lo que el viento se llevó",
+            "author": "Margaret Mitchell",
+            "date": [1936, 4, 11], 
+            "pagesCount":1036,
+            "imgUrl": "./img/id-10.jpg"
+        }
+    ]
+}

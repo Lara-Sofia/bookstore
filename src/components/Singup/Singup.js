@@ -9,15 +9,20 @@ import useWindowSize from "../custom/useWindowSize/useWindowSize";
 import ComboLanguage from "../ui/ComboLanguage/ComboLanguage";
 import useTranslation from "../custom/useTranslation/useTranslation";
 
+
+
 const Singup = () => {
+    //utiliza el hook useState de React para declarar una variable de estado llamada formData
+    //formData es un objeto que almacenará los valores de los campos del formulario.
+    //setFormData es una función que se utilizará para actualizar el estado de formData
     const [formData, setFormData] = useState({
+        //inicializo los campos como cadena de texto vacia
         //Legajo: "",
         userName: "",
         email: "",
         password: "",
         repeatPassword: "",
     });
-    
 
     //const { handleSingup } = useContext(AuthenticationContext);
     const { theme } = useContext(ThemeContext);
@@ -27,8 +32,8 @@ const Singup = () => {
 
     const navigation = useNavigate();
 
-    //alert por no completar
-    const alertSingup = (valueAlert) => {
+    // Alerta por no completar un campo
+    const alertSignup = (valueAlert) => {
         valueAlert.current.focus();
         valueAlert.current.style.borderColor = "red";
         valueAlert.current.style.outline = "none";
@@ -40,100 +45,91 @@ const Singup = () => {
     const passwordRef = useRef(null);
     const repeatPasswordRef = useRef(null);
 
+
     const registerOnClick = () => {
-        //if (legajoRef.current.value.length === 0) {
+         //if (legajoRef.current.value.length === 0) {
         //    alertSingup(legajoRef);
         //    return;
         //}
 
+        //Compruebo que los campos no esten vacios
+        //en el caso de ser true,  retorno una alerta
         if (userNameRef.current.value.length === 0) {
-            alertSingup(userNameRef);
+            alertSignup(userNameRef);
             return;
         }
         if (emailRef.current.value.length === 0) {
-            alertSingup(emailRef);
+            alertSignup(emailRef);
             return;
         }
         if (passwordRef.current.value.length === 0) {
-            alertSingup(passwordRef);
+            alertSignup(passwordRef);
             return;
         }
         if (repeatPasswordRef.current.value.length === 0) {
-            alertSingup(repeatPasswordRef);
+            alertSignup(repeatPasswordRef);
             return;
         }
     }
-    //toma los valores y setea nuevos
-    //const handleChange = (e) => {
-    //    const { userName, value } = e.target;
-    //    setFormData((prevData) => ({
-    //        ...prevData, [userName]: value,
-    //    }));
 
-    //}
-    //reescribiendo el Form
-    const onChange = (e) => setFormData({ 
-        ...formData, 
-        [e.target.userName]: e.target.value,
-        [e.target.email]: e.target.value,
-        [e.target.password]: e.target.value,
-        [e.target.repeatPassword]: e.target.value,
-    });
+    //funcion encargada de manejar los cambios en los campos de entraa
+    const onChange = (e) => {
+        //actualiza el estado formData
+        setFormData({
+            //crear una copia del objeto formData actual.
+            //No modifica el estado sino que crea un nuevo objeto en base a el
+            ...formData,
+            //e.target.name hace referencia al ATRIBUTO name del elemento del formulario que desencadenó el evento onChange.
+            [e.target.name]: e.target.value,
+        });
+    };
 
-    const handleSingup = (e) => {
+    const handleSignup = (e) => {
         e.preventDefault();
-        //declaramos el formData
-        const { userName, email, password, repeatPassword } = formData; 
-        // Validar los campos antes de enviarlo al servidor (?????????????
+         //declaramos el formData
+        const { userName, email, password, repeatPassword } = formData;
+         // Validar los campos antes de enviarlo al servidor (?????????????
         if (!userName || !email || !password || !repeatPassword) {
             alert(translate("errorComplete"));
             return;
         }
-        // Validar que las contraseñas coincidan
-        if (password != repeatPassword) {
+         // Validar que las contraseñas coincidan
+        if (password !== repeatPassword) {
             alert(translate("errorEquals"));
             return;
         }
-        //validar el legajo que sean sólo números
+        // Validar el legajo para que solo contenga números
 
-        // Limpiar los campos después del envío
+
+  // utiliza la función setFormData para actualizar el estado de formData
+  // Limpiar los campos después del envío
         setFormData({
             userName: "",
             email: "",
             password: "",
             repeatPassword: "",
         });
-
-        // Enviar los datos al servidor
-        //sendDataToServer(formData);//????
-        alert(translate("successfully"));
+        // Redireccionar a la página de "Usuario Registrado"
+        navigation("/registered");
     }
-
-    //Yo no entender
-    //const sendDataToServer = (data) => {
-    //    // Realizar la llamada al servidor para enviar los datos
-    //    // Aplicar medidas de seguridad del lado del servidor
-    //    console.log("Sending data to server: ", data);
-    //};
-    //const { userName, email, password, repeatPassword } = formData;
 
     const goToLogin = () => {
         navigation("/login");
     }
 
     return (
-        <div className="singin-container">
-            <div className={`singin-box ${theme === "dark" && "singin-box-dark"}`}>
+        <div className="signup-container">
+            <div className={`signup-box ${theme === "dark" && "signup-box-dark"}`}>
                 <ComboLanguage />
-                <h4 className={`${email.length === 0 && "red-text"}`}>
+                <h4 className={`${formData.email.length === 0 && "red-text"}`}>
                     {translate("register")}
                 </h4>
-                <div onSubmit={handleSingup}>
+                <form onSubmit={handleSignup}>
                     <div className="input-container">
                         <input
                             className="input-control"
                             name="userName"
-                            value={userName}
+                            value={formData.userName}
                             placeholder={translate("username")}
                             type="text"
                             ref={userNameRef}
@@ -141,8 +137,6 @@ const Singup = () => {
                             required
                             pattern="[a-zA-Z]+"
                         />
-                        {/*errors[0].isError && <p>{errors[0].text}</p>*/}
-                        <div />
                         <div className="input-container">
                             <input
                                 className="input-control"
@@ -151,35 +145,32 @@ const Singup = () => {
                                 onChange={onChange}
                                 required
                                 name="email"
-                                value={email}
+                                value={formData.email}
                                 ref={emailRef}
                             />
                         </div>
-                        {/*errors[1].isError && <p>{errors[1].text}</p>*/}
                         <div className="input-container">
                             <input
                                 className="input-control"
                                 placeholder={translate("password")}
                                 type="password"
                                 name="password"
-                                value={password}
+                                value={formData.password}
                                 ref={passwordRef}
                                 onChange={onChange}
                             />
                         </div>
-                        {/*errors[2].isError && <p>{errors[2].text}</p>*/}
                         <div className="input-container">
                             <input
                                 className="input-control"
                                 placeholder={translate("repeatPassword")}
                                 type="password"
                                 name="repeatPassword"
-                                value={repeatPassword}
+                                value={formData.repeatPassword}
                                 ref={repeatPasswordRef}
                                 onChange={onChange}
                             />
                         </div>
-                        {/*errors[2].isError && <p>{errors[2].text}</p>*/}
                         <button onClick={registerOnClick} className="signin-button" type="submit">
                             {translate("signup")}
                         </button>
@@ -188,8 +179,7 @@ const Singup = () => {
                         </p>
                         <ToggleTheme />
                     </div>
-                </div>
-
+                </form>
             </div>
         </div>
     );

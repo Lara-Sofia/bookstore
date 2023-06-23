@@ -15,6 +15,7 @@ import { ThemeContext } from "./components/services/theme/theme.context";
 import Spinner from "./components/ui/Spinner/Spinner";
 import { APIContext } from "./components/services/api/api.context";
 import Singin from "./components/Singup/Singup";
+import Registered from "./components/routes/Registered";
 const App = () => {
   const { theme } = useContext(ThemeContext);
   const { isLoading } = useContext(APIContext);
@@ -28,6 +29,10 @@ const App = () => {
     {
       path: "/singin",
       element: <Singin />, 
+    },
+    {
+      path: "/registered",
+      element: <Registered />, 
     },
     {
       path: "/home",
