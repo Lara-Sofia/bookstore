@@ -16,6 +16,9 @@ import Spinner from "./components/ui/Spinner/Spinner";
 import { APIContext } from "./components/services/api/api.context";
 import Singin from "./components/Singup/Singup";
 import Registered from "./components/routes/Registered";
+import BookItem from "./components/BookItem/BookItems";
+import FireBase from "./firebase/FireBase";
+
 const App = () => {
   const { theme } = useContext(ThemeContext);
   const { isLoading } = useContext(APIContext);
@@ -45,6 +48,10 @@ const App = () => {
     {
       path: "*",
       element: <NotFound />,
+    },
+    {
+      path: "/fireBase",
+      element: <FireBase />
     },
   ]);
   return (

@@ -18,3 +18,11 @@
   color: white;
   border: 1px solid white;
 }
+
+.image {
+  width: 200px; /* Ancho deseado para la imagen */
+  height: 200px; /* Alto deseado para la imagen */
+  object-fit: cover; /* Ajusta la imagen al tamaño especificado sin deformarla */
+  border-radius: 50%; /* Aplica un borde redondeado a la imagen */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Agrega una sombra a la imagen */
+}
