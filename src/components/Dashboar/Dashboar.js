@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-
-import NewBook from "../NewBook/NewBook";
 import BooksFilter from "../Filter/BookFilter";
 import Books from "../Books/Books";
 import { useNavigate } from "react-router";
@@ -9,6 +7,10 @@ import { AuthenticationContext } from "../services/authentication/authentication
 import ToggleTheme from "../ui/ToggleTheme";
 import { APIContext } from "../services/api/api.context";
 import FireBase from "../../firebase/FireBase";
+import NewBookButton from "../NewBook/NewBookButton";
+import Header from "../Header/Header";
+import DeleteBookButton from "../DeleteBook/DeleteBook";
+import AddAdminButton from "../AddAdmin/AddAdminButton/AddAdminButton";
 
 /* const BOOKS = [
   {
@@ -92,6 +94,8 @@ const Dashboard = () => {
 
   return (
     <>
+    <Header />
+    <AddAdminButton />
       <Row className="me-2 my-4">
         <Col>
           <h4 className="text-left m-3">Hola {userName}</h4>
@@ -103,7 +107,8 @@ const Dashboard = () => {
           </Button>
         </Col>
       </Row>
-      <NewBook onBookAdded={addBookHandler} />
+      <NewBookButton />
+      <DeleteBookButton />
       <BooksFilter
         filterYear={filterYear}
         onFilterYearChange={filterYearChanged}

@@ -18,6 +18,7 @@ import Singin from "./components/Singup/Singup";
 import Registered from "./components/routes/Registered";
 import BookItem from "./components/BookItem/BookItems";
 import FireBase from "./firebase/FireBase";
+import AddAdminForm from "./components/AddAdmin/AddAdminForm/AddAdminForm";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -44,6 +45,10 @@ const App = () => {
           <Dashboard />
         </Protected>
       ),
+    },
+    {
+      path: "/addAdmin",
+      element: <AddAdminForm />
     },
     {
       path: "*",
