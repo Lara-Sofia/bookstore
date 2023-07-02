@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
+import Spinner from "../ui/Spinner/Spinner";
 import { Navigate } from "react-router";
-import { AuthenticationContext } from "../services/authentication/authentication.context";
+import {  useAuth } from "../services/authentication/authentication.context";
 
-const Protected = ({ children, isSignedIn }) => {
-  const { user } = useContext(AuthenticationContext);
+const Protected = ({ children }) => {
+  const { user, isLoading} = useAuth();
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  if (isLoading) return <Spinner />;
+  if (!user) return <Navigate to="/login" replace />;
 
-  return children;
+  return <>{children}</>;
 };
 
 export default Protected;

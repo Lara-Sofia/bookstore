@@ -14,10 +14,13 @@ export const dictionary_translations = {
     { key: "errorComplete", value: "Debe completar los campos" },
     { key: "errorName", value: "Nombre no válido" },
     { key: "errorEmail", value: "Email no válido" },
-    { key: "errorPassword", value: "Contraseña no válida" },
-    { key: "errorEquals", value: "Las contraseñas deben coincidir" },
+    { key: "errorPassword", value: "Contraseña no válida. Debe tener 6 caracteres" },
+    { key: "errorLogined", value: "Usted no está registrado" },
+    { key: "errorRegisted", value: "El email ya tiene una cuenta" },
     { key: "successfully", value: "El formulario se ha enviado con éxito" },
     { key: "account", value: "Ya tienes una cuenta?" },
+    { key: "wrong-password", value: "Contraseña incorrecta"},
+    { key: "addNewAdmin", value: "Agregar administrador"}
   ],
   en: [
     { key: "login", value: "Login" },
@@ -34,9 +37,12 @@ export const dictionary_translations = {
     { key: "errorComplete", value: "Complete all the fields" },
     { key: "errorName", value: "Name is not valid" },
     { key: "errorEmail", value: "Email is not valid" },
-    { key: "errorPassword", value: "Password is not valid" },
-    { key: "errorEquals", value: "The password do not match" },
+    { key: "errorPassword", value: "Password is not valid. Must be 6 characters" },
+    { key: "errorLogined", value: "You are not registered" },
+    { key: "errorRegisted", value: "Email already has an account" },
     { key: "successfully", value: "Form submitted successfully" },
     { key: "account", value: "Already have an account?" },
+    { key: "wrong-password", value: "Incorrect password"},
+    { key: "addNewAdmin", value: "Add new admin"}
   ],
 };

@@ -1,3 +1,4 @@
+/*
 import { createContext, useState } from "react";
 
 export const APIContext = createContext();
@@ -14,4 +15,4 @@ export const APIContextProvider = ({ children }) => {
       {children}
     </APIContext.Provider>
   );
-};
+};*/

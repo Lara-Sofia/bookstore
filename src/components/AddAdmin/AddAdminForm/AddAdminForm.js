@@ -1,18 +1,16 @@
 import React, { useContext, useRef, useState } from "react";
-
-import "./Singup.css";
 import { useNavigate } from "react-router";
 //import { AuthenticationContext } from "../services/authentication/authentication.context";
-import { useAuth } from "../services/authentication/authentication.context";
-import ToggleTheme from "../ui/ToggleTheme";
-import { ThemeContext } from "../services/theme/theme.context";
-import useWindowSize from "../custom/useWindowSize/useWindowSize";
-import ComboLanguage from "../ui/ComboLanguage/ComboLanguage";
-import useTranslation from "../custom/useTranslation/useTranslation";
+import { useAuth } from "../../services/authentication/authentication.context";
+//import ToggleTheme from "../../ui/ToggleTheme";
+import { ThemeContext } from "../../services/theme/theme.context";
+import useWindowSize from "../../custom/useWindowSize/useWindowSize";
+import ComboLanguage from "../../ui/ComboLanguage/ComboLanguage";
+import useTranslation from "../../custom/useTranslation/useTranslation";
 
 
 
-const Singup = () => {
+const AddAdminForm = () => {
     /*utiliza el hook useState de React para declarar una variable de estado llamada formData
     formData es un objeto que almacenará los valores de los campos del formulario.
     setFormData es una función que se utilizará para actualizar el estado de formData*/
@@ -20,7 +18,7 @@ const Singup = () => {
         //inicializo los campos como cadena de texto vacia
         email: "",
         password: "",
-        rol: "user",
+        rol: "admin",
     });
 
     //constantes que setean 
@@ -32,10 +30,10 @@ const Singup = () => {
     const [error, setError] = useState("");
 
     //Ref
-    
+
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    
+
 
     // Alerta por no completar un campo
     const alertSignup = (valueAlert) => {
@@ -47,7 +45,7 @@ const Singup = () => {
     const registerOnClick = () => {
         /*Compruebo que los campos no esten vacios
         en el caso de ser true,  retorno una alerta*/
-       
+
         if (emailRef.current.value.length === 0) {
             alertSignup(emailRef);
             return;
@@ -56,7 +54,7 @@ const Singup = () => {
             alertSignup(passwordRef);
             return;
         }
-        
+
     }
 
     //funcion encargada de manejar los cambios en los campos de entrada
@@ -76,28 +74,28 @@ const Singup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         setError("");
-         //declaramos el formData
-        const { email, password , rol} = formData;
-         // Validar los campos antes de enviarlo al servidor
-        if ( !email || !password ) {
+        //declaramos el formData
+        const { email, password, rol } = formData;
+        // Validar los campos antes de enviarlo al servidor
+        if (!email || !password) {
             alert(translate("errorComplete"));
             return;
         }
 
-       
+
 
         //try catch firebase
         try {
-            await signup (formData.email, formData.password, formData.rol);
+            await signup(formData.email, formData.password, formData.rol);
             // Redireccionar a la página de "Usuario Registrado"
             navigation("/registered");
-        } catch (error) { 
+        } catch (error) {
             console.log(error.code);
             if (error.code === "auth/internal-error") {
                 setError(translate("errorEmail"));
-            } else if (error.code === "auth/weak-password"){
+            } else if (error.code === "auth/weak-password") {
                 setError(translate("errorPassword"));
-            } else if (error.code === "auth/email-already-in-use" ){
+            } else if (error.code === "auth/email-already-in-use") {
                 setError(translate("errorRegisted"));
             }
             //setError(error.message);
@@ -108,7 +106,7 @@ const Singup = () => {
             email: "",
             password: "",
         });
-        
+
     }
 
     const goToLogin = () => {
@@ -118,9 +116,8 @@ const Singup = () => {
     return (
         <div className="signup-container">
             <div className={`signup-box ${theme === "dark" && "signup-box-dark"}`}>
-                <ComboLanguage />
                 <h4 className={`${formData.email.length === 0 && "red-text"}`}>
-                    {translate("register")}
+                    {translate("addNewAdmin")}
                 </h4>
                 <form onSubmit={handleSignup}>
                     <div className="input-container">
@@ -147,19 +144,9 @@ const Singup = () => {
                                 onChange={onChange}
                             />
                         </div>
-                        <div className="input-container">
-                            <select name="rol">
-                                <option value="user">Estudiante</option>
-                                <option value="admin">Administrador</option>
-                            </select>
-                        </div>
                         <button onClick={registerOnClick} className="signin-button" type="submit">
-                            {translate("signup")}
+                            {translate("addNewAdmin")}
                         </button>
-                        <p>
-                            {translate("account")} <button className="signin-button" onClick={goToLogin}>Login</button>
-                        </p>
-                        <ToggleTheme />
                     </div>
                 </form>
                 {error && <p>{error}</p>}
@@ -168,4 +155,4 @@ const Singup = () => {
     );
 }
 
-export default Singup;
+export default AddAdminForm;

@@ -16,12 +16,16 @@ import Spinner from "./components/ui/Spinner/Spinner";
 import { APIContext } from "./components/services/api/api.context";
 import Singin from "./components/Singup/Singup";
 import Registered from "./components/routes/Registered";
-import BookItem from "./components/BookItem/BookItems";
+//import BookItem from "./components/BookItem/BookItems";
 import FireBase from "./firebase/FireBase";
+import { useAuth } from "./components/services/authentication/authentication.context";
+
+import AddAdminForm from "./components/AddAdmin/AddAdminForm/AddAdminForm";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
-  const { isLoading } = useContext(APIContext);
+  //const { isLoading } = useContext(APIContext);
+  const { isLoading } = useAuth();
 
   const router = createBrowserRouter([
     { path: "/", element: <Navigate to="login" /> },
@@ -52,6 +56,10 @@ const App = () => {
     {
       path: "/fireBase",
       element: <FireBase />
+    },
+    {
+      path: "/addAdmin",
+      element: <AddAdminForm />
     },
   ]);
   return (
