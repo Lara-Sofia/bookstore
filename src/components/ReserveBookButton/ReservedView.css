@@ -1,0 +1,38 @@
+.reserved-view {
+    background-color: rgb(29, 117, 29);
+    padding: 1rem;
+    margin: 2rem auto;
+    width: 50rem;
+    max-width: 95%;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  }
+  
+  .reserved-view button {
+    font: inherit;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid rgb(25, 25, 99);
+    background-color: rgb(25, 25, 99);
+    color: white;
+    border-radius: 12px;
+    margin-right: 1rem;
+  }
+  
+  .reserved-view button:hover,
+  .reserved-view button:active {
+    background-color: rgb(55, 55, 165);
+    border-color: rgb(55, 55, 165);
+  }
+  
+  .reserved-view button.alternative {
+    color: #220131;
+    border-color: transparent;
+    background-color: transparent;
+  }
+  
+  .reserved-view button.alternative:hover,
+  .reserved-view button.alternative:active {
+    background-color: #ddb3f8;
+  }
