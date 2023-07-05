@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebase/config";
+import { db } from "../../firebase/configDB";
 import "./BookList.css";
-//import Delete from "../DeleteBook/Delete";
-//import EditBook from "../EditBookButton/EditBookButton";
+import ImgDefault from "../../assets/img/imgDefault.jpg"
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -41,6 +40,8 @@ const BookList = () => {
       setUpdatedBookImage(bookToEdit.img);
     }
   };
+
+  
 
   const handleDeleteBook = (bookId) => {
     db.collection("books")
@@ -159,12 +160,12 @@ const BookList = () => {
                 </button>
               </div>
             ) : (
-              <div>
+              <div>                
                 <h3>{book.title}</h3>
                 <p>Author: {book.author}</p>
                 <p>Pages: {book.pages}</p>
                 <p>Description: {book.description}</p>
-                <img src={book.img} alt="Portada del libro" />
+                <img src={book.img || {ImgDefault}} alt="Portada del libro" />
                 <div className="buttons-container">
                   <button onClick={() => handleDeleteBook(book.id)}>
                     Delete

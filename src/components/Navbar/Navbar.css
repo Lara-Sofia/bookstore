@@ -1,0 +1,38 @@
+/* Navbar.css */
+.navbar {
+    background-color: #acf0bc;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .navbar .row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  .navbar .col {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  .navbar h4 {
+    font-size: 18px;
+    margin: 0;
+    color: #555;
+  }
+  
+  .navbar .toggle-button {
+    margin-left: 15px;
+  }
+  
+  .navbar .logout-button {
+    margin-left: 15px;
+  }
+  
