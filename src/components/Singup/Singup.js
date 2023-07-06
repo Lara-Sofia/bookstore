@@ -9,7 +9,9 @@ import useWindowSize from "../custom/useWindowSize/useWindowSize";
 import ComboLanguage from "../ui/ComboLanguage/ComboLanguage";
 import useTranslation from "../custom/useTranslation/useTranslation";
 import { Button, Form } from "react-bootstrap";
+
 import "./Singup.css";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const Singup = () => {
@@ -80,7 +82,7 @@ const Singup = () => {
         const { email, password , rol} = formData;
          // Validar los campos antes de enviarlo al servidor
         if ( !email || !password ) {
-            alert(translate("errorComplete"));
+            toast.error(translate("errorCompleteFields"));
             return;
         }
 
@@ -91,6 +93,8 @@ const Singup = () => {
             await signup (formData.email, formData.password, formData.rol);
             // Redireccionar a la página de "Usuario Registrado"
             navigation("/registered");
+           
+
         } catch (error) { 
             console.log(error.code);
             if (error.code === "auth/internal-error") {
@@ -100,6 +104,8 @@ const Singup = () => {
             } else if (error.code === "auth/email-already-in-use" ){
                 setError(translate("errorRegisted"));
             }
+            toast.error(translate("signupFailed"));
+
             //setError(error.message);
         }
         // utiliza la función setFormData para actualizar el estado de formData
@@ -156,6 +162,7 @@ const Singup = () => {
                                         value={formData.password}
                                         ref={passwordRef}
                                         onChange={onChange}
+                                        
                                     />
                                 </div>
 
@@ -191,7 +198,7 @@ const Singup = () => {
                 <ComboLanguage />
                 </div>
             </div>
-
+         <ToastContainer/>
         </div>
     );
 }
