@@ -9,6 +9,8 @@ import useWindowSize from "../custom/useWindowSize/useWindowSize";
 import ComboLanguage from "../ui/ComboLanguage/ComboLanguage";
 import useTranslation from "../custom/useTranslation/useTranslation";
 import { Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
 
@@ -58,6 +60,16 @@ const Login = () => {
       alertLogin(passwordRef);
       return;
     }
+     // Additional email validation
+     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+     if (!emailRegex.test(formData.email)) {
+       alert(translate("errorInvalidEmail"));
+       return;
+     }
+
+         // All fields are filled, perform login logic
+    handleLogin();
+
 
   }
 
@@ -91,6 +103,8 @@ const Login = () => {
       await login(formData.email, formData.password);
       // Redireccionar a la página de "Usuario Registrado"
       navigation("/home");
+      toast.success(translate("loginSuccessful"));
+
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/internal-error") {
@@ -104,6 +118,7 @@ const Login = () => {
       } else if (error.code === "auth/wrong-password") {
         setError(translate("wrong-password"));
       }
+      toast.error(translate("loginFailed"));
       //setError(error.message);
     }
     // utiliza la función setFormData para actualizar el estado de formData
@@ -162,6 +177,7 @@ const Login = () => {
                     value={formData.password}
                     ref={passwordRef}
                     onChange={onChange}
+                    required
                   />
 
                 </div>
@@ -192,7 +208,7 @@ const Login = () => {
         <ComboLanguage />
         </div>
       </div>
-
+      <ToastContainer />
 
     </div>
   );
