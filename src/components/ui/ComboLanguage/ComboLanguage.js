@@ -17,7 +17,7 @@ const ComboLanguage = () => {
       onChange={changeLanguageHandler}
       value={language}
       aria-label="Select Language"
-      className="w-50 mb-4"
+      className="btn btn-dark w-25 mb-4 text-right"
     >
       <option value="es">{translate("spanish_lang")}</option>
       <option value="en">{translate("english_lang")}</option>

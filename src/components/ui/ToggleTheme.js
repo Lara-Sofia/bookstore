@@ -9,7 +9,7 @@ const ToggleTheme = () => {
   return (
     <Button 
       onClick={toggleTheme}
-      className="mt-4"
+      className="btn mb-4 text-right"
       variant={theme === "light" ? "dark" : "light"}
     >
       {theme === "light"

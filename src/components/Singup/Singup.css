@@ -1,13 +1,41 @@
-.singin-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.split-left {
+  left: 0;
+  background-color: #EBE6DB;
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  
 }
 
-.singin-box {
-  border: 1px solid rgba(0, 0, 0, 0.384);
+.split-right {
+  right: 0;
+  background-image: url("D:\bookstore\src\assets\img\login.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+
+.signup-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.signup-box {
+  border: 1px solid #030838;
   border-radius: 10px;
   width: 600px;
   height: 480px;
@@ -17,12 +45,25 @@
   align-items: center;
 }
 
-.singin-box-dark {
-  border: 1px solid white;
+img {
+  width: 350px;
+  height: auto;
+  padding-left: 80px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+
+.img-dark{
+  filter: invert(100%);
+}
+
+
+.signup-box-dark {
+  border: 1px solid #EBE6DB;
 }
 
 .input-container {
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .input-control {
@@ -34,12 +75,28 @@
   max-width: 100%;
 }
 
-.singin-button {
-  text-align: end;
-  background-color: black;
-  border-radius: 10px;
-  color: white;
-  font-size: 18px;
-  padding: 10px;
+
+.split-left-dark {
+  background-color: #030838;
+}
+
+.button {
+  background-color: #96B276;
+  color:#1E221C;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
 }
+
+.button:hover {
+  background-color: #6f8a51;
+  color: #1E221C;
+}
+
+.button:active {
+  background-color: #52673a;
+  color: #1E221C;
+}
+

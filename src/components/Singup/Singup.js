@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
 
-import "./Singup.css";
 import { useNavigate } from "react-router";
 //import { AuthenticationContext } from "../services/authentication/authentication.context";
 import { useAuth } from "../services/authentication/authentication.context";
@@ -9,7 +8,8 @@ import { ThemeContext } from "../services/theme/theme.context";
 import useWindowSize from "../custom/useWindowSize/useWindowSize";
 import ComboLanguage from "../ui/ComboLanguage/ComboLanguage";
 import useTranslation from "../custom/useTranslation/useTranslation";
-
+import { Button, Form } from "react-bootstrap";
+import "./Singup.css";
 
 
 const Singup = () => {
@@ -112,58 +112,86 @@ const Singup = () => {
     }
 
     const goToLogin = () => {
-        navigation("/login");
+        navigation("/login");   
     }
 
     return (
-        <div className="signup-container">
-            <div className={`signup-box ${theme === "dark" && "signup-box-dark"}`}>
-                <ComboLanguage />
-                <h4 className={`${formData.email.length === 0 && "red-text"}`}>
-                    {translate("register")}
-                </h4>
-                <form onSubmit={handleSignup}>
-                    <div className="input-container">
-                        <div className="input-container">
-                            <input
-                                className="input-control"
-                                placeholder="Email"
-                                type="email"
-                                onChange={onChange}
-                                required
-                                name="email"
-                                value={formData.email}
-                                ref={emailRef}
-                            />
-                        </div>
-                        <div className="input-container">
-                            <input
-                                className="input-control"
-                                placeholder={translate("password")}
-                                type="password"
-                                name="password"
-                                value={formData.password}
-                                ref={passwordRef}
-                                onChange={onChange}
-                            />
-                        </div>
-                        <div className="input-container">
-                            <select name="rol">
-                                <option value="user">Estudiante</option>
-                                <option value="admin">Administrador</option>
-                            </select>
-                        </div>
-                        <button onClick={registerOnClick} className="signin-button" type="submit">
-                            {translate("signup")}
-                        </button>
-                        <p>
-                            {translate("account")} <button className="signin-button" onClick={goToLogin}>Login</button>
-                        </p>
-                        <ToggleTheme />
+        <div>
+            <div className={`split-left ${theme === "dark" && "split-left-dark"}`}>
+
+            <div className={`img ${theme === "dark" && "img-dark"}`}>
+                <img src="https://utn.edu.ar/images/logo-utn.png"/>
+                </div>
+
+                <div className="signup-container">
+
+                    <div className={`signup-box ${theme === "dark" && "signup-box-dark"}`}>
+
+                        <h4 className={`${formData.email.length === 0 && "red-text"}`}>
+                            {translate("register")}
+                        </h4>
+
+                        <form onSubmit={handleSignup}>
+                            <div className="input-container">
+
+                                <div className="input-container">
+                                    <input
+                                        className="input-control"
+                                        placeholder="Email"
+                                        type="email"
+                                        onChange={onChange}
+                                        required
+                                        name="email"
+                                        value={formData.email}
+                                        ref={emailRef}
+                                    />
+                                </div>
+
+                                <div className="input-container">
+                                    <input
+                                        className="input-control"
+                                        placeholder={translate("password")}
+                                        type="password"
+                                        name="password"
+                                        value={formData.password}
+                                        ref={passwordRef}
+                                        onChange={onChange}
+                                    />
+                                </div>
+
+                                <div className="input-container">
+                                    <Form.Select name="rol">
+                                        <option value="user">{translate("user")}</option>
+                                        <option value="admin">{translate("admin")}</option>
+                                    </Form.Select>
+                                </div>
+
+                                <div className="mb-2">
+                                <Button onClick={registerOnClick} className="button" type="submit">
+                                    {translate("signup")}
+                                </Button>
+                                </div>
+
+                                <p>
+                                    {translate("account")} <Button className="button" onClick={goToLogin}>Login</Button>
+                                </p>
+
+                            </div>
+                        </form>
+                        
+                        {error && <p>{error}</p>}
+
                     </div>
-                </form>
-                {error && <p>{error}</p>}
+                </div>
             </div>
+
+            <div className="split-right">
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end me-md-2 p-2">
+                <ToggleTheme />
+                <ComboLanguage />
+                </div>
+            </div>
+
         </div>
     );
 }

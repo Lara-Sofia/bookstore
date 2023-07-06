@@ -1,6 +1,10 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./StyleMessange.css"
+import useTranslation from "../custom/useTranslation/useTranslation";
+
+const translate = useTranslation();
 
 const Registered = () => {
   const navigation = useNavigate();
@@ -10,11 +14,14 @@ const Registered = () => {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center">
-      <h2>Registered User!</h2>
-      <Button className="w-25" onClick={goBackHandler} variant="primary">
-        Go Back
-      </Button>
+    <div className="background">
+      <div className="container">
+        <h2 className="text">{translate("registered")}</h2>
+        <p className="text">{translate("goback")}</p>
+        <Button className="button" onClick={goBackHandler} variant="primary">
+          {translate("back")}
+        </Button>
+      </div>
     </div>
   );
 };

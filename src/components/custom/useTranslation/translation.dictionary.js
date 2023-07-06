@@ -4,7 +4,7 @@ export const dictionary_translations = {
     { key: "signup", value: "Registrate" },
     { key: "dark_theme_change", value: "Cambiar a tema oscuro" },
     { key: "light_theme_change", value: "Cambiar a tema claro" },
-    { key: "welcome", value: "¡Hola Denuevo👋!" },
+    { key: "welcome", value: "¡Hola👋!" },
     { key: "register", value: "¡Bienvenidos a Bookstore📚!" },
     { key: "username", value: "Nombre" },
     { key: "spanish_lang", value: "Español" },
@@ -20,15 +20,20 @@ export const dictionary_translations = {
     { key: "successfully", value: "El formulario se ha enviado con éxito" },
     { key: "account", value: "Ya tienes una cuenta?" },
     { key: "wrong-password", value: "Contraseña incorrecta"},
-    { key: "addNewAdmin", value: "Agregar administrador"}
+    { key: "addNewAdmin", value: "Agregar administrador"},
+    {key: "admin", value: "Administrador"},
+    {key: "user", value: "Estudiante"},
+    {key: "registered", value: "¡Usuario registrado!"},
+    {key: "goback", value: "Vuelve atras para ingresar con tu nuevo usuario"},
+    {key: "back", value: "Atras"}
   ],
   en: [
-    { key: "login", value: "Login" },
-    { key: "signup", value: "SingUp" },
+    { key: "login", value: "Log In" },
+    { key: "signup", value: "Sign Up" },
     { key: "dark_theme_change", value: "Change to dark theme" },
     { key: "light_theme_change", value: "Change to light theme" },
-    { key: "welcome", value: "Hi Again👋!" },
-    { key: "register", value: "¡Welcome to Bookstore📚!" },
+    { key: "welcome", value: "Hi👋!" },
+    { key: "register", value: "Welcome to Bookstore📚!" },
     { key: "username", value: "User Name" },
     { key: "spanish_lang", value: "Spanish" },
     { key: "english_lang", value: "English" },
@@ -43,6 +48,11 @@ export const dictionary_translations = {
     { key: "successfully", value: "Form submitted successfully" },
     { key: "account", value: "Already have an account?" },
     { key: "wrong-password", value: "Incorrect password"},
-    { key: "addNewAdmin", value: "Add new admin"}
+    { key: "addNewAdmin", value: "Add new admin"},
+    {key: "admin", value: "Administrator"},
+    {key: "user", value: "Student"},
+    {key: "registered", value: "Registered user!"},
+    {key: "goback", value: "Go back to log in with your new user"},
+    {key: "back", value: "Go back"}
   ],
 };

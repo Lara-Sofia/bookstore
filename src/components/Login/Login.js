@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
 
-import "./Login.css";
 import { useNavigate } from "react-router";
 //import { AuthenticationContext } from "../services/authentication/authentication.context";
 import { useAuth } from "../services/authentication/authentication.context";
@@ -9,6 +8,8 @@ import { ThemeContext } from "../services/theme/theme.context";
 import useWindowSize from "../custom/useWindowSize/useWindowSize";
 import ComboLanguage from "../ui/ComboLanguage/ComboLanguage";
 import useTranslation from "../custom/useTranslation/useTranslation";
+import { Button } from "react-bootstrap";
+import "./Login.css";
 
 
 
@@ -119,50 +120,80 @@ const Login = () => {
     navigation("/singin");
   }
 
+
   return (
-    <div className="signup-container">
-      <div className={`signup-box ${theme === "dark" && "signup-box-dark"}`}>
-        <ComboLanguage />
-        <h4 className={`${formData.email.length === 0 && "red-text"}`}>
-          {translate("register")}
-        </h4>
-        <form onSubmit={handleLogin}>
-          <div className="input-container">
-            <div className="input-container">
-              <input
-                className="input-control"
-                placeholder="Email"
-                type="email"
-                onChange={onChange}
-                required
-                name="email"
-                value={formData.email}
-                ref={emailRef}
-              />
-            </div>
-            <div className="input-container">
-              <input
-                className="input-control"
-                placeholder={translate("password")}
-                type="password"
-                name="password"
-                value={formData.password}
-                ref={passwordRef}
-                onChange={onChange}
-              />
-            </div>
-            <button onClick={registerOnClick} className="signin-button" type="submit">
-              {translate("login")}
-            </button>
-            <p>No tienes cuenta <button onClick={goToSingin} className="signin-button" type="button">
-              {translate("signup")}
-            </button>
-            </p>
-            <ToggleTheme />
+    <div>
+
+      <div className={`split-left ${theme === "dark" && "split-left-dark"}`}>
+        
+      <div className={`img ${theme === "dark" && "img-dark"}`}>
+        <img src="https://utn.edu.ar/images/logo-utn.png"/>
+        </div>
+        
+        <div className="login-container">
+
+          <div className={`login-box ${theme === "dark" && "login-box-dark"}`}>
+            <h4 className={`${formData.email.length === 0 && "red-text"}`}>
+              {translate("welcome")}
+            </h4>
+
+            <form onSubmit={handleLogin}>
+
+              <div>
+                <div className="input-container">
+                  <input
+                    className="input-control"
+                    placeholder="Email"
+                    type="email"
+                    onChange={onChange}
+                    required
+                    name="email"
+                    value={formData.email}
+                    ref={emailRef}
+                  />
+                </div>
+
+                <div className="input-container">
+                  <input
+                    className="input-control"
+                    placeholder={translate("password")}
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    ref={passwordRef}
+                    onChange={onChange}
+                  />
+
+                </div>
+                
+                <div className="mb-2">
+                <Button onClick={registerOnClick} className="button" type="submit">
+                  {translate("login")}
+                </Button>
+                </div>
+
+                <p>{translate("account")} <Button className="button" onClick={goToSingin}>
+                  {translate("signup")}
+                </Button>
+                </p>
+
+              </div>
+            </form>
+
+            {error && <p>{error}</p>}
+
           </div>
-        </form>
-        {error && <p>{error}</p>}
+        </div>
       </div>
+
+      <div className="split-right">
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end me-md-2 p-2">
+        <ToggleTheme />
+        <ComboLanguage />
+        </div>
+      </div>
+
+
     </div>
   );
 }
